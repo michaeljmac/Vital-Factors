@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VFAppDelegate : UIResponder <UIApplicationDelegate>
+@interface VFAppDelegate : UIResponder <UIApplicationDelegate> {
+    
+    NSDate *backgroundDate;
+    
+}
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) NSString *isInternet;
 
 @end
