@@ -18,6 +18,90 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSDate *startDate = [allData objectAtIndex:13];
+    
+    NSDate *first, *second, *third, *fourth, *fifth;
+    
+    NSInteger totalAmount, totalNumber, i;
+    
+    NSArray *countryArray, *totalNewArray, *totalExistingArray, *bonusNewArray, *bonusExistingArray;
+    
+    NSInteger total1, total2, total3, total4, total5, amount1, amount2, amount3, amount4, amount5;
+    
+    totalAmount = 0;
+    totalNumber = 0;
+    
+    countryArray = [NSArray arrayWithArray:[allData objectAtIndex:21]];
+    totalNewArray = [NSArray arrayWithArray:[allData objectAtIndex:18]];
+    totalExistingArray = [NSArray arrayWithArray:[allData objectAtIndex:17]];
+    bonusNewArray = [NSArray arrayWithArray:[allData objectAtIndex:20]];
+    bonusExistingArray = [NSArray arrayWithArray:[allData objectAtIndex:19]];
+    
+    for (i=0; i<[countryArray count]; i++) {
+        
+        totalNumber = totalNumber + [[totalExistingArray objectAtIndex:i] intValue] + [[totalNewArray objectAtIndex:i] intValue];
+        totalAmount = totalAmount + ([[bonusExistingArray objectAtIndex:i] intValue] * [[totalExistingArray objectAtIndex:i] intValue]) + ([[bonusNewArray objectAtIndex:i] intValue] * [[totalNewArray objectAtIndex:i] intValue]);
+        
+    }
+    
+    agreementAmount = totalAmount;
+    
+    if ([[allData objectAtIndex:9] isEqualToString:@"Exclusive"]) {
+        
+        first = [startDate dateByAddingTimeInterval:60*60*24*90];
+        second = [startDate dateByAddingTimeInterval:60*60*24*365];
+        third = [startDate dateByAddingTimeInterval:60*60*24*365*2];
+        fourth = [startDate dateByAddingTimeInterval:60*60*24*365*3];
+        fifth = [startDate dateByAddingTimeInterval:60*60*24*365*4];
+        
+        total1 = totalNumber * .2;
+        total2 = totalNumber * .21;
+        total3 = totalNumber * .15;
+        total4 = totalNumber * .15;
+        total5 = totalNumber * .15;
+        
+        amount1 = totalAmount * .2;
+        amount2 = totalAmount * .21;
+        amount3 = totalAmount * .15;
+        amount4 = totalAmount * .15;
+        amount5 = totalAmount * .15;
+        
+        numberArray = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", nil];
+        percentArray = [NSMutableArray arrayWithObjects:@"20%", @"21%", @"15%", @"15%", @"15%", nil];
+        dateArray = [NSMutableArray arrayWithObjects:first.description,second.description,third.description,fourth.description,fifth.description, nil];
+        amountArray = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%ld",amount1], [NSString stringWithFormat:@"%ld",amount2], [NSString stringWithFormat:@"%ld",amount3], [NSString stringWithFormat:@"%ld",amount4], [NSString stringWithFormat:@"%ld",amount5], nil];
+        wiresArray = [NSMutableArray arrayWithObjects:@"70%", @"100%", @"100%", @"100%", @"100%", nil];
+        totalArray = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%ld",total1], [NSString stringWithFormat:@"%ld",total2], [NSString stringWithFormat:@"%ld",total3], [NSString stringWithFormat:@"%ld",total4], [NSString stringWithFormat:@"%ld",total5], nil];
+        
+    } else {
+        
+        first = [startDate dateByAddingTimeInterval:60*60*24*90];
+        second = [startDate dateByAddingTimeInterval:60*60*24*150];
+        third = [startDate dateByAddingTimeInterval:60*60*24*365];
+        fourth = [startDate dateByAddingTimeInterval:60*60*24*365*2];
+        fifth = [startDate dateByAddingTimeInterval:60*60*24*365*3];
+        
+        total1 = totalNumber * .19;
+        total2 = totalNumber * .18;
+        total3 = totalNumber * .21;
+        total4 = totalNumber * .21;
+        total5 = totalNumber * .21;
+        
+        amount1 = totalAmount * .19;
+        amount2 = totalAmount * .18;
+        amount3 = totalAmount * .21;
+        amount4 = totalAmount * .21;
+        amount5 = totalAmount * .21;
+        
+        numberArray = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", nil];
+        percentArray = [NSMutableArray arrayWithObjects:@"19%", @"18%", @"21%", @"21%", @"21%", nil];
+        dateArray = [NSMutableArray arrayWithObjects:first.description,second.description,third.description,fourth.description,fifth.description, nil];
+        amountArray = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%ld",amount1], [NSString stringWithFormat:@"%ld",amount2], [NSString stringWithFormat:@"%ld",amount3], [NSString stringWithFormat:@"%ld",amount4], [NSString stringWithFormat:@"%ld",amount5], nil];
+        wiresArray = [NSMutableArray arrayWithObjects:@"50%", @"100%", @"100%", @"100%", @"100%", nil];
+        totalArray = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%ld",total1], [NSString stringWithFormat:@"%ld",total2], [NSString stringWithFormat:@"%ld",total3], [NSString stringWithFormat:@"%ld",total4], [NSString stringWithFormat:@"%ld",total5], nil];
+        
+    }
+    
     agreement1 = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://myvitalfactors.com/wireagreement1.html"] encoding:NSStringEncodingConversionAllowLossy error:nil];
     
     agreement2 = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://myvitalfactors.com/wireagreement2.html"] encoding:NSStringEncodingConversionAllowLossy error:nil];
@@ -31,6 +115,60 @@
     agreement1 = [agreement1 stringByReplacingOccurrencesOfString:@"##State##" withString:[allData objectAtIndex:6]];
     agreement1 = [agreement1 stringByReplacingOccurrencesOfString:@"##Zip##" withString:[allData objectAtIndex:7]];
     agreement1 = [agreement1 stringByReplacingOccurrencesOfString:@"##Brand##" withString:[allData objectAtIndex:8]];
+    
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Agent ID##" withString:[allData objectAtIndex:0]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##DBA Name##" withString:[allData objectAtIndex:1]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Business Owner##" withString:[allData objectAtIndex:2]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Dual Agent ID##" withString:[allData objectAtIndex:3]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Street Address##" withString:[allData objectAtIndex:4]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##City##" withString:[allData objectAtIndex:5]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##State##" withString:[allData objectAtIndex:6]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Zip##" withString:[allData objectAtIndex:7]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Brand##" withString:[allData objectAtIndex:8]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Branches##" withString:[allData objectAtIndex:10]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Date Signed##" withString:((NSDate *)[allData objectAtIndex:13]).description];
+    
+    if ([[allData objectAtIndex:9] isEqualToString:@"Exclusive"]) {
+        
+        agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Duration##" withString:@"5 Years (60 Months)"];
+        agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Expiration##" withString:[dateArray objectAtIndex:4]];
+        
+    } else {
+        
+        agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Duration##" withString:@"3 Years (36 Months)"];
+        agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##Expiration##" withString:[dateArray objectAtIndex:4]];
+        
+    }
+    
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##1%##" withString:[percentArray objectAtIndex:0]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##2%##" withString:[percentArray objectAtIndex:1]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##3%##" withString:[percentArray objectAtIndex:2]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##4%##" withString:[percentArray objectAtIndex:3]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##5%##" withString:[percentArray objectAtIndex:4]];
+    
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##d1##" withString:[dateArray objectAtIndex:0]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##d2##" withString:[dateArray objectAtIndex:1]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##d3##" withString:[dateArray objectAtIndex:2]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##d4##" withString:[dateArray objectAtIndex:3]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##d5##" withString:[dateArray objectAtIndex:4]];
+    
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##a1##" withString:[amountArray objectAtIndex:0]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##a2##" withString:[amountArray objectAtIndex:1]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##a3##" withString:[amountArray objectAtIndex:2]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##a4##" withString:[amountArray objectAtIndex:3]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##a5##" withString:[amountArray objectAtIndex:4]];
+    
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##new##" withString:@"70%"];
+    
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##t1##" withString:[totalArray objectAtIndex:0]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##t2##" withString:[totalArray objectAtIndex:0]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##t3##" withString:[totalArray objectAtIndex:0]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##t4##" withString:[totalArray objectAtIndex:0]];
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##t5##" withString:[totalArray objectAtIndex:0]];
+    
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##t6##" withString:[NSString stringWithFormat:@"%ld",(long)agreementAmount]];
+    
+    agreement2 = [agreement2 stringByReplacingOccurrencesOfString:@"##newwirestable##" withString:@"This will be the table with all the countries and wire totals"];
     
     final1 = [self stringWithHTML:agreement1];
     final2 = [self stringWithHTML:agreement2];

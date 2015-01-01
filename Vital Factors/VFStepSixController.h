@@ -25,6 +25,10 @@
     
     BOOL isView1, isView2;
     
+    NSMutableArray *numberArray, *percentArray, *dateArray, *amountArray, *wiresArray, *totalArray;
+    
+    NSInteger agreementAmount;
+    
 }
 
 - (void)compileData:(NSArray *)theData;
