@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>964AADC5-65ED-426E-A9B9-123CCE45E73D</string>
 	<key>IDESourceControlProjectName</key>
-	<string>vital factors</string>
+	<string>Vital Factors</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3E1AE8363EE68644CA56EA1D8A758533784AD419</key>
 		<string>https://github.com/michaeljmac/Vital-Factors.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>vital factors.xcodeproj</string>
+	<string>Vital Factors.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3E1AE8363EE68644CA56EA1D8A758533784AD419</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>3E1AE8363EE68644CA56EA1D8A758533784AD419</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Vital%20Factors</string>
+			<string>Vital-Factors</string>
 		</dict>
 	</array>
 </dict>
